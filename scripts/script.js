@@ -5,10 +5,10 @@ const BASE_URL = 'https://v-content.practicum-team.ru';
 const endpoint = `${BASE_URL}/api/videos?pagination[pageSize]=${cardsOnPage}&`;
 
 /* ЭЛЕМЕНТЫ СТРАНИЦЫ */
-const cardsList = document.querySelector('.content__list');
-const cardsContainer = document.querySelector('.content__list-container');
-const videoContainer = document.querySelector('.result__video-container');
-const videoElement = document.querySelector('.result__video');
+const cardsList = document.querySelector('.content_list');
+const cardsContainer = document.querySelector('.content_list-container');
+const videoContainer = document.querySelector('.result_video-container');
+const videoElement = document.querySelector('.result_video');
 const form = document.querySelector('form');
 
 /* ТЕМПЛЕЙТЫ */
@@ -80,8 +80,8 @@ async function mainMechanics(endpoint) {
       posterUrl: data.results[0].poster.url,
     });
     document
-      .querySelectorAll('.content__card-link')[0]
-      .classList.add('content__card-link_current');
+      .querySelectorAll('.content_card-link')[0]
+      .classList.add('content_card-link_current');
     await waitForReadyVideo(videoElement);
     await delay(preloaderWaitindTime);
     removePreloader(videoContainer, '.preloader');
@@ -93,8 +93,8 @@ async function mainMechanics(endpoint) {
     chooseCurrentVideo({
       baseUrl: BASE_URL,
       videoData: cardsOnPageState,
-      cardLinksSelector: '.content__card-link',
-      currentLinkClassName: 'content__card-link_current',
+      cardLinksSelector: '.content_card-link',
+      currentLinkClassName: 'content_card-link_current',
       mainVideo: videoElement,
     });
 
@@ -159,14 +159,14 @@ function appendCards({ baseUrl, dataArray, cardTmp, container }) {
   dataArray.forEach((el) => {
     const node = cardTmp.content.cloneNode(true);
     node.querySelector('a').setAttribute('id', el.id);
-    node.querySelector('.content__video-card-title').textContent = el.city;
-    node.querySelector('.content__video-card-description').textContent =
+    node.querySelector('.content_video-card-title').textContent = el.city;
+    node.querySelector('.content_video-card-description').textContent =
       el.description;
     node
-      .querySelector('.content__video-card-thumbnail')
+      .querySelector('.content_video-card-thumbnail')
       .setAttribute('src', `${baseUrl}${el.thumbnail.url}`);
     node
-      .querySelector('.content__video-card-thumbnail')
+      .querySelector('.content_video-card-thumbnail')
       .setAttribute('alt', el.description);
     container.append(node);
   });
@@ -249,7 +249,7 @@ function chooseCurrentVideo({
 // вывожу интерфейс, когда видео не найдено ✅
 function showError(container, errorTemplate, errorMessage) {
   const node = errorTemplate.content.cloneNode(true);
-  node.querySelector('.error__title').textContent = errorMessage;
+  node.querySelector('.error_title').textContent = errorMessage;
   container.append(node);
   console.log('показал, ошибку');
 }
@@ -288,8 +288,8 @@ function showMoreCards({
       chooseCurrentVideo({
         baseUrl: BASE_URL,
         videoData: cardsOnPageState,
-        cardLinksSelector: '.content__card-link',
-        currentLinkClassName: 'content__card-link_current',
+        cardLinksSelector: '.content_card-link',
+        currentLinkClassName: 'content_card-link_current',
         mainVideo: videoElement,
       });
       showMoreCards({
